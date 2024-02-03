@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://capuf3lox3spv"]
+
+[ext_resource type="Script" path="res://scripts/controller_tiles.gd" id="1_hgtep"]
+[ext_resource type="Script" path="res://scripts/controller_pieces.gd" id="2_pokkq"]
+[ext_resource type="Script" path="res://scripts/piece.gd" id="3_mwiee"]
+
+[node name="1" type="Node2D"]
+
+[node name="ControllerTiles" type="Node" parent="."]
+script = ExtResource("1_hgtep")
+
+[node name="ControllerPieces" type="Node" parent="." node_paths=PackedStringArray("pieces")]
+script = ExtResource("2_pokkq")
+pieces = [NodePath("../Piece")]
+
+[node name="Piece" type="CharacterBody2D" parent="."]
+script = ExtResource("3_mwiee")

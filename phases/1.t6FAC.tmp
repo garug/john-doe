@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://capuf3lox3spv"]
+
+[ext_resource type="Script" path="res://scripts/artificial_intelligence/base.gd" id="1_2srdp"]
+[ext_resource type="Script" path="res://scripts/controller_tiles.gd" id="1_hgtep"]
+[ext_resource type="Script" path="res://scripts/controller_turn.gd" id="1_r6wpr"]
+[ext_resource type="Script" path="res://scripts/controller_character_tile.gd" id="2_2qt0q"]
+[ext_resource type="Script" path="res://scripts/controller_pieces.gd" id="2_pokkq"]
+[ext_resource type="Script" path="res://scripts/controller_movement.gd" id="3_4ml8d"]
+[ext_resource type="Script" path="res://scripts/game_character.gd" id="4_3xbf0"]
+[ext_resource type="Texture2D" uid="uid://cnk7bcc7jo428" path="res://arts/characters/main_player.png" id="4_hmedg"]
+[ext_resource type="Texture2D" uid="uid://cntf74w3qangm" path="res://arts/characters/purple_character.png" id="6_bxohr"]
+
+[node name="1" type="Node2D"]
+
+[node name="AIBase" type="Node" parent="." node_paths=PackedStringArray("controller_pieces", "controller_tiles", "controller_turn")]
+script = ExtResource("1_2srdp")
+controller_pieces = NodePath("../ControllerPieces")
+controller_tiles = NodePath("../ControllerTiles")
+controller_turn = NodePath("../ControllerTurn")
+
+[node name="ControllerTurn" type="Node2D" parent="." node_paths=PackedStringArray("controller_movement", "controller_characters", "controller_tiles")]
+script = ExtResource("1_r6wpr")
+controller_movement = NodePath("../ControllerMovement")
+controller_characters = NodePath("../ControllerPieces")
+controller_tiles = NodePath("../ControllerTiles")
+participants = [0, 1]
+
+[node name="ControllerCharacterTile" type="Node2D" parent="." node_paths=PackedStringArray("controller_tiles", "controller_characters")]
+script = ExtResource("2_2qt0q")
+controller_tiles = NodePath("../ControllerTiles")
+controller_characters = NodePath("../ControllerPieces")
+
+[node name="ControllerMovement" type="Node2D" parent="." node_paths=PackedStringArray("controller_pieces", "controller_tiles")]
+script = ExtResource("3_4ml8d")
+controller_pieces = NodePath("../ControllerPieces")
+controller_tiles = NodePath("../ControllerTiles")
+
+[node name="ControllerTiles" type="Node2D" parent="."]
+script = ExtResource("1_hgtep")
+
+[node name="ControllerPieces" type="Node2D" parent="." node_paths=PackedStringArray("pieces")]
+script = ExtResource("2_pokkq")
+pieces = [NodePath("../Team2-1"), NodePath("../Team1-1"), NodePath("../Team2-2"), NodePath("../Team1-2")]
+
+[node name="Team1-1" type="CharacterBody2D" parent="."]
+script = ExtResource("4_3xbf0")
+texture = ExtResource("6_bxohr")
+initial_position = Vector2(0, 3)
+team = null
+attack = null
+defense = 50
+attack_type = null
+attack_directions = null
+
+[node name="Team1-2" type="CharacterBody2D" parent="."]
+script = ExtResource("4_3xbf0")
+texture = ExtResource("6_bxohr")
+initial_position = Vector2(0, 4)
+team = null
+attack = null
+defense = null
+attack_type = null
+attack_directions = null
+
+[node name="Team2-1" type="CharacterBody2D" parent="."]
+script = ExtResource("4_3xbf0")
+texture = ExtResource("4_hmedg")
+initial_position = null
+team = 1
+attack = null
+defense = null
+attack_type = null
+attack_directions = null
+
+[node name="Team2-2" type="CharacterBody2D" parent="."]
+script = ExtResource("4_3xbf0")
+texture = ExtResource("4_hmedg")
+initial_position = Vector2(0, 1)
+team = 1
+attack = null
+defense = null
+attack_type = null
+attack_directions = null

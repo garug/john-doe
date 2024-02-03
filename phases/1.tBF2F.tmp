@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://capuf3lox3spv"]
+
+[ext_resource type="Script" path="res://scripts/controller_tiles.gd" id="1_hgtep"]
+[ext_resource type="Script" path="res://scripts/controller_turn.gd" id="1_r6wpr"]
+[ext_resource type="Script" path="res://scripts/controller_pieces.gd" id="2_pokkq"]
+[ext_resource type="Script" path="res://scripts/controller_movement.gd" id="3_4ml8d"]
+[ext_resource type="Script" path="res://scripts/game_character.gd" id="4_3xbf0"]
+[ext_resource type="Texture2D" uid="uid://cnk7bcc7jo428" path="res://arts/characters/main_player.png" id="4_hmedg"]
+[ext_resource type="Texture2D" uid="uid://cntf74w3qangm" path="res://arts/characters/purple_character.png" id="6_bxohr"]
+
+[node name="1" type="Node2D"]
+
+[node name="ControllerTurn" type="Node2D" parent="."]
+script = ExtResource("1_r6wpr")
+
+[node name="ControllerMovement" type="Node2D" parent="." node_paths=PackedStringArray("controller_pieces", "controller_tiles")]
+script = ExtResource("3_4ml8d")
+controller_pieces = NodePath("../ControllerPieces")
+controller_tiles = NodePath("../ControllerTiles")
+
+[node name="ControllerTiles" type="Node2D" parent="."]
+script = ExtResource("1_hgtep")
+
+[node name="ControllerPieces" type="Node2D" parent="." node_paths=PackedStringArray("pieces")]
+script = ExtResource("2_pokkq")
+pieces = [NodePath("../MainCharacter"), NodePath("../Enemy1"), NodePath("../MainCharacter2"), NodePath("../Enemy2")]
+
+[node name="MainCharacter" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("4_3xbf0")
+texture = ExtResource("4_hmedg")
+initial_position = Vector2(0, 1)
+
+[node name="MainCharacter2" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("4_3xbf0")
+texture = ExtResource("4_hmedg")
+initial_position = Vector2(0, 2)
+
+[node name="Enemy1" type="CharacterBody2D" parent="."]
+script = ExtResource("4_3xbf0")
+texture = ExtResource("6_bxohr")
+initial_position = Vector2(0, 3)
+
+[node name="Enemy2" type="CharacterBody2D" parent="."]
+script = ExtResource("4_3xbf0")
+texture = ExtResource("6_bxohr")
+initial_position = Vector2(0, 4)

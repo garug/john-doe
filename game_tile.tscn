@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8mkj2ijb2n4b"]
+
+[ext_resource type="Script" path="res://scripts/game_tile.gd" id="1_jkx3i"]
+[ext_resource type="Texture2D" uid="uid://sdi83lo0hs43" path="res://arts/tiles/default.png" id="2_xld4e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8dn2"]
+radius = 16.0
+
+[node name="tile" type="Node2D"]
+z_index = -1
+script = ExtResource("1_jkx3i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xld4e")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_i8dn2")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
